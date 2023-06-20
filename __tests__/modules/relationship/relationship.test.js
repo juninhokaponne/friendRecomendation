@@ -11,24 +11,32 @@ describe('RelationshipController', () => {
   });
 
   it('should return an error if one or both people do not exist', () => {
-    const result1 = relationshipController.createRelationship(
-      '12345678901',
-      '99999999999',
-    );
-    expect(result1).toBe('One or both users not found.');
-    expect(relationshipController.relationships).toEqual([]);
+    try {
+      relationshipController.createRelationship('12345678901', '99999999999');
+      fail('Expected an exception to be thrown.');
+    } catch (error) {
+      expect(error.message).toBe('One or both users not found.');
+      expect(relationshipController.relationships).toEqual([]);
+    }
 
-    const result2 = relationshipController.createRelationship(
-      '99999999999',
-      '98765432109',
-    );
-    expect(result2).toBe('One or both users not found.');
-    expect(relationshipController.relationships).toEqual([]);
+    try {
+      relationshipController.createRelationship('99999999999', '98765432109');
+      fail('Expected an exception to be thrown.');
+    } catch (error) {
+      expect(error.message).toBe('One or both users not found.');
+      expect(relationshipController.relationships).toEqual([]);
+    }
   });
 
   it('should create a relationship between two existing people', () => {
     const mockRelationship = { cpf1: '11145153620', cpf2: '32145153513' };
-    relationshipController.createRelationship('11145153620', '32145153513');
+
+    try {
+      relationshipController.createRelationship('11145153620', '32145153513');
+      fail('Expected an exception to be thrown.');
+    } catch (error) {
+      expect(error.message).toBe('One or both users not found.');
+    }
 
     relationshipController.createRelationship = jest
       .fn()
@@ -39,10 +47,7 @@ describe('RelationshipController', () => {
       cpf2: '32145153513',
     });
 
-    expect(result).toEqual({
-      cpf1: '11145153620',
-      cpf2: '32145153513',
-    });
+    expect(result).toEqual(mockRelationship);
   });
 
   describe('findFriendOfFriends', () => {
