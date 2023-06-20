@@ -1,3 +1,4 @@
+const AppError = require('../errors/error');
 class RelationshipController {
   constructor() {
     this.relationships = [];
@@ -13,7 +14,7 @@ class RelationshipController {
     const person2 = this.people.find((person) => person.cpf === Number(cpf2));
 
     if (!person1 || !person2) {
-      return 'One or both users not found.';
+      throw new AppError('One or both users not found.', 404);
     }
 
     this.relationships.push({ cpf1, cpf2 });
@@ -23,13 +24,13 @@ class RelationshipController {
 
   getRecommendations(userCpf) {
     if (isNaN(userCpf)) {
-      return 'CPF must contain 11 numeric digits.';
+      throw new AppError('CPF must contain 11 numeric digits.', 404);
     }
 
     const person = this.people.find(({ cpf }) => cpf === Number(userCpf));
 
     if (!person) {
-      return 'User not found.';
+      throw new AppError('User not found.', 404);
     }
 
     const friendOfFriends = this.findFriendOfFriends(userCpf);
