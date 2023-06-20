@@ -21,7 +21,7 @@ Clone o projeto
 Entre no diretório do projeto
 
 ```bash
-  cd challenger
+  cd friendRecomendation
 ```
 
 Instale as dependências
