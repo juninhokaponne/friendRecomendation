@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/index.js",
-    "test": "jest --coverage"
+    "dev": "nodemon ./src/server.js",
+    "test": "jest --coverage --watch"
   },
   "keywords": [],
   "author": "Gilson Oliveira",

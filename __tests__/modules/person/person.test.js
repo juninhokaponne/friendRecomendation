@@ -1,5 +1,5 @@
-const PersonController = require('../src/controller/PersonController');
-const AppError = require('../src/errors/error');
+const PersonController = require('../../../src/controller/PersonController');
+const AppError = require('../../../src/errors/error');
 
 describe('PersonController', () => {
   let personController;
@@ -26,7 +26,7 @@ describe('PersonController', () => {
       personController.createPerson('12345678909', 'John Doe');
 
       expect(() => {
-        personController.createPerson('12345678909', 'Jane Smith');
+        personController.createPerson('helloHello', 'Jane Smith');
       }).toThrow(AppError);
     });
   });

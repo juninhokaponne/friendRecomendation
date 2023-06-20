@@ -46,14 +46,14 @@ class RelationshipController {
 
     for (const { cpf1, cpf2 } of this.relationships) {
       if (cpf1 === Number(userCpf)) {
-        const friend = this.people.find(({ cpf }) => cpf === cpf2);
+        const friend = this.people.find(({ cpf }) => cpf === Number(cpf2));
 
         if (friend) {
           for (const { cpf1, cpf2 } of this.relationships) {
             if (
               cpf1 === friend.cpf &&
               cpf2 !== Number(userCpf) &&
-              !this.isDuplicateRelationship(userCpf, cpf2)
+              !this.isDuplicateRelationship(userCpf, Number(cpf2))
             ) {
               const friendOfFriend = this.people.find(
                 ({ cpf }) => cpf === cpf2,
