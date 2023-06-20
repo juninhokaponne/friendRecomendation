@@ -36,7 +36,7 @@ router.post('/relationship', (req, res) => {
   res.status(result.error ? 400 : 200).json(result);
 });
 
-router.get('/recommendations/:cpf', (req, res) => {
+router.get('/recommendations/:cpf', validateCPF, (req, res) => {
   const { cpf } = req.params;
   relationshipController.setPeople(personController.people);
   const recommendations = relationshipController.getRecommendations(cpf);
