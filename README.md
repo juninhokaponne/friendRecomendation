@@ -15,7 +15,7 @@ Siga as etapas abaixo para executar o projeto localmente em seu ambiente de dese
 Clone o projeto
 
 ```bash
-  git clone https://link-para-o-projeto
+  git clone [https://link-para-o-projeto](https://github.com/juninhokaponne/friendRecomendation.git)
 ```
 
 Entre no diretório do projeto
