@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./src/server.js",
-    "test": "jest --coverage --watch"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Gilson Oliveira",
