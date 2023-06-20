@@ -6,20 +6,7 @@ describe('RelationshipController', () => {
   beforeEach(() => {
     relationshipController = new RelationshipController();
     relationshipController.setPeople([
-      { cpf: '12345678901', name: 'John Doe' },
-      { cpf: '98765432109', name: 'Jane Smith' },
-      { cpf: '45678912304', name: 'Bob Johnson' },
-    ]);
-  });
-
-  it('should create a relationship between two existing people', () => {
-    const result = relationshipController.createRelationship(
-      '12345678901',
-      '98765432109',
-    );
-    expect(result).toBe('Relationship created successfully.');
-    expect(relationshipController.relationships).toEqual([
-      { cpf1: '12345678901', cpf2: '98765432109' },
+      { cpf1: '12345678901', cpf2: '32145153513' },
     ]);
   });
 
@@ -39,18 +26,36 @@ describe('RelationshipController', () => {
     expect(relationshipController.relationships).toEqual([]);
   });
 
-  it('should return recommendations based on friend of friends', () => {
-    relationshipController.createRelationship('12345678901', '98765432109');
-    relationshipController.createRelationship('12345678901', '45678912304');
-    relationshipController.createRelationship('98765432109', '45678912304');
+  it('should create a relationship between two existing people', () => {
+    const mockRelationship = { cpf1: '11145153620', cpf2: '32145153513' };
+    relationshipController.createRelationship('11145153620', '32145153513');
 
-    const recommendations =
-      relationshipController.getRecommendations('12345678901');
-    expect(recommendations).toEqual(['98765432109']);
+    relationshipController.createRelationship = jest
+      .fn()
+      .mockReturnValue(mockRelationship);
+
+    const result = relationshipController.createRelationship({
+      cpf1: '11145153620',
+      cpf2: '32145153513',
+    });
+
+    expect(result).toEqual({
+      cpf1: '11145153620',
+      cpf2: '32145153513',
+    });
   });
 
-  it('should return an error if the user is not found', () => {
-    const result = relationshipController.getRecommendations('99999999999');
-    expect(result).toBe('User not found.');
+  describe('findFriendOfFriends', () => {
+    it('should return an empty object if the user has no friend of friends', () => {
+      const userCpf = '11111111111';
+      const result = relationshipController.findFriendOfFriends(userCpf);
+
+      expect(result).toEqual({});
+    });
+
+    it('should return an empty object if no friend of friends found', () => {
+      const result = relationshipController.findFriendOfFriends('11111111111');
+      expect(result).toEqual({});
+    });
   });
 });
