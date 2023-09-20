@@ -1,60 +1,60 @@
-# Recomendador de amigos
+# Friend Recommender
 
-Projeto criado para um desafio do processo seletivo da ewally.
+This project aims to use a simple recommendation algorithm, initially it was made for a challenge and today it counts as a free repository for everyone to contribute.
 
-## Como Executar
+## How to Run
 
-Siga as etapas abaixo para executar o projeto localmente em seu ambiente de desenvolvimento.
+Follow the steps below to run the project locally in your development environment.
 
-### Pré-requisitos
+### Prerequisites
 
-- Certifique-se de ter o Node.js instalado em seu sistema. Você pode baixá-lo em [https://nodejs.org](https://nodejs.org).
+- Ensure you have Node.js installed on your system. You can download it from [https://nodejs.org](https://nodejs.org).
 
-## Rodando localmente
+## Running Locally
 
-Clone o projeto
+Clone the project
 
 ```bash
   git clone https://github.com/juninhokaponne/friendRecomendation.git
 ```
 
-Entre no diretório do projeto
+Navigate to the project directory
 
 ```bash
   cd friendRecomendation
 ```
 
-Instale as dependências
+Install dependencies
 
 ```bash
   npm install
 ```
 
-Inicie o servidor
+Start the server
 
 ```bash
   npm run dev
 ```
 
-## Rodando os testes
+## Running Tests
 
-Para rodar os testes, rode o seguinte comando
+To run the tests, execute the following command
 
 ```bash
   npm run test
 ```
 
-## Referência
+## Reference
 
-- [Requisitos para funcionalidades](https://communication-assets.gupy.io/production/companies/51551/emails/1686938256054/communication-assets-3bb42930-0c6f-11ee-a60e-f18a54602daa/enunciado.pdf)
+- [Functional Requirements (PDF)](https://communication-assets.gupy.io/production/companies/51551/emails/1686938256054/communication-assets-3bb42930-0c6f-11ee-a60e-f18a54602daa/enunciado.pdf)
 
-## Stack utilizada
+## Used Stack
 
 **Back-end:** Node, Express, Nodemon, Jest, Supertest
 
-## Documentação da API
+## API Documentation
 
-#### Cria um usuário
+#### Create a User
 
 ```http
   POST /person
@@ -65,7 +65,7 @@ Para rodar os testes, rode o seguinte comando
 | `cpf`     | `number` | **Obrigatório** |
 | `name`    | `string` | **Obrigatório** |
 
-#### Retorna um usuário
+#### Retrieve a User
 
 ```http
   GET /person/:CPF
@@ -75,13 +75,13 @@ Para rodar os testes, rode o seguinte comando
 | :-------- | :------- | :-------------- |
 | `cpf`     | `number` | **Obrigatório** |
 
-#### Clean - Apaga todos registros
+#### Clean - Delete all records
 
 ```http
   DELETE /clean
 ```
 
-#### Cria uma relação entre dois cpf
+#### Create a Relationship between two CPFs
 
 ```http
   POST /relationship
@@ -92,7 +92,7 @@ Para rodar os testes, rode o seguinte comando
 | `cpf1`    | `number` | **Obrigatório** |
 | `cpf2`    | `number` | **Obrigatório** |
 
-#### Sugere uma recomendação de amigo
+#### Get Friend Recommendations
 
 ```http
   GET /recommendations/:CPF
@@ -102,6 +102,21 @@ Para rodar os testes, rode o seguinte comando
 | :-------- | :------- | :-------------- |
 | `cpf`     | `number` | **Obrigatório** |
 
-## Licenças
+## Licenses
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+
+How to Contribute
+
+If you'd like to contribute to this repository over time, please follow these guidelines:
+
+    Fork the repository to your own GitHub account.
+    Clone the forked repository to your local machine.
+    Make your desired changes and improvements.
+    Create a new branch for your changes.
+    Commit your changes with clear and concise commit messages.
+    Push your changes to your forked repository.
+    Create a pull request to the original repository, explaining your changes and why they should be merged.
+    Collaborate with others and iterate on the changes as needed.
+
+Thank you for considering contributing to this project! Your contributions are highly appreciated.
