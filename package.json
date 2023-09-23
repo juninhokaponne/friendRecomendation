@@ -17,5 +17,5 @@
     "jest": "^29.5.0",
     "supertest": "^6.3.3"
   },
-  "description": ""
+  "description": "This project aims to use a simple recommendation algorithm, initially it was made for a challenge and today it counts as a free repository for everyone to contribute."
 }
