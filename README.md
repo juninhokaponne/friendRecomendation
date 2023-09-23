@@ -102,21 +102,20 @@ To run the tests, execute the following command
 | :-------- | :------- | :-------------- |
 | `cpf`     | `number` | **Obrigatório** |
 
-## Licenses
-
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-
-How to Contribute
+## How to Contribute
 
 If you'd like to contribute to this repository over time, please follow these guidelines:
 
-    Fork the repository to your own GitHub account.
-    Clone the forked repository to your local machine.
-    Make your desired changes and improvements.
-    Create a new branch for your changes.
-    Commit your changes with clear and concise commit messages.
-    Push your changes to your forked repository.
-    Create a pull request to the original repository, explaining your changes and why they should be merged.
-    Collaborate with others and iterate on the changes as needed.
+1. Fork the project 
+2. Clone the forked repository to your local machine.
+3. Make your desired changes and improvements.
+4. Create a new branch for your changes.
+5. Commit your changes with clear and concise commit messages.
+6. Push your changes to your forked repository.
+7. Create a pull request to the original repository, explaining your changes and why they should be merged
 
 Thank you for considering contributing to this project! Your contributions are highly appreciated.
+
+## Licenses
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
