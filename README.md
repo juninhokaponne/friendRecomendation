@@ -106,7 +106,7 @@ To run the tests, execute the following command
 
 If you'd like to contribute to this repository over time, please follow these guidelines:
 
-1. Fork the project 
+1. Fork the project
 2. Clone the forked repository to your local machine.
 3. Make your desired changes and improvements.
 4. Create a new branch for your changes.
