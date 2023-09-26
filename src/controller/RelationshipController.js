@@ -79,6 +79,19 @@ class RelationshipController {
         cpf1 === Number(userCpf) && cpf2 === friendOfFriendCpf,
     );
   }
+  createRelationshipRoute = (req, res) => {
+    const { cpf1, cpf2 } = req.body;
+    this.setPeople(personController.people);
+    const result = this.createRelationship(cpf1, cpf2);
+    res.status(result.error ? 400 : 200).json(result);
+  }
+  getRelationshipRoute = (req, res) => {
+    const { cpf } = req.params;
+    this.setPeople(personController.people);
+    const recommendations = this.getRecommendations(cpf);
+    res.status(recommendations.error ? 400 : 200).json(recommendations);
+  }
+
 }
 
 module.exports = RelationshipController;
