@@ -38,6 +38,23 @@ class PersonController {
     this.people = [];
     return "People cleaned successfully.";
   }
+
+  createPersonRoute = (req, res) => {
+    const { cpf, name } = req.body;
+    const result = this.createPerson(cpf, name);
+    res.status(result.error ? 400 : 200).send(result);
+  };
+
+  getPersonRoute = (req, res) => {
+    const { cpf } = req.params;
+    const person = this.getPerson(cpf);
+    res.status(person.error ? 404 : 200).json(person);
+  };
+
+  cleanPeopleRoute = (req, res) => {
+    const result = this.cleanPeople();
+    res.status(200).json(result);
+  };
 }
 
 module.exports = PersonController;
