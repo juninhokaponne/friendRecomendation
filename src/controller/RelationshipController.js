@@ -1,8 +1,11 @@
 const AppError = require("../errors/error");
+const PersonController = require("./PersonController");
+
 class RelationshipController {
   constructor() {
     this.relationships = [];
     this.people = [];
+    this.personController = new PersonController();
   }
 
   setPeople(people) {
@@ -10,8 +13,12 @@ class RelationshipController {
   }
 
   createRelationship(cpf1, cpf2) {
-    const person1 = this.people.find((person) => person.cpf === Number(cpf1));
-    const person2 = this.people.find((person) => person.cpf === Number(cpf2));
+    const person1 = this.personController.people.find(
+      (person) => person.cpf === Number(cpf1),
+    );
+    const person2 = this.personController.people.find(
+      (person) => person.cpf === Number(cpf2),
+    );
 
     if (!person1 || !person2) {
       throw new AppError("One or both users not found.", 404);
@@ -79,19 +86,20 @@ class RelationshipController {
         cpf1 === Number(userCpf) && cpf2 === friendOfFriendCpf,
     );
   }
+
   createRelationshipRoute = (req, res) => {
     const { cpf1, cpf2 } = req.body;
-    this.setPeople(personController.people);
+    this.setPeople(this.people);
     const result = this.createRelationship(cpf1, cpf2);
     res.status(result.error ? 400 : 200).json(result);
-  }
+  };
+
   getRelationshipRoute = (req, res) => {
     const { cpf } = req.params;
-    this.setPeople(personController.people);
+    this.setPeople(this.people);
     const recommendations = this.getRecommendations(cpf);
     res.status(recommendations.error ? 400 : 200).json(recommendations);
-  }
-
+  };
 }
 
 module.exports = RelationshipController;

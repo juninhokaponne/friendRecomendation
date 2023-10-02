@@ -16,7 +16,6 @@ router.delete("/clean", personController.cleanPeopleRoute);
 router.post("/relationship", relationshipController.createRelationshipRoute);
 router.get(
   "/recommendations/:cpf",
-  validateCPF,
   relationshipController.getRelationshipRoute,
 );
 
