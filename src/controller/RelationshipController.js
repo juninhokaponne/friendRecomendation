@@ -6,6 +6,7 @@ class RelationshipController {
     this.relationships = [];
     this.people = [];
     this.personController = new PersonController();
+    this.relationshipIndex = {};
   }
 
   setPeople(people) {
@@ -24,9 +25,17 @@ class RelationshipController {
       throw new AppError("One or both users not found.", 404);
     }
 
-    this.relationships.push({ cpf1, cpf2 });
+    if (!this.isDuplicateRelationship(person1, person2))
+      this.relationships.push({ cpf1, cpf2 });
+    else return "Relationship Alredy Exists";
 
     return "Relationship created successfully.";
+  }
+
+  isDuplicateRelationship(person1, person2) {
+    return this.relationships?.some(
+      ({ cpf1, cpf2 }) => cpf1 === person1.cpf && cpf2 === person2.cpf,
+    );
   }
 
   getRecommendations(userCpf) {
@@ -52,39 +61,35 @@ class RelationshipController {
   findFriendOfFriends(userCpf) {
     const friendOfFriends = {};
 
+    // Build the relationship index
     for (const { cpf1, cpf2 } of this.relationships) {
-      if (cpf1 === Number(userCpf)) {
-        const friend = this.people.find(({ cpf }) => cpf === Number(cpf2));
+      if (!this.relationshipIndex[cpf1]) {
+        this.relationshipIndex[cpf1] = [];
+      }
 
-        if (friend) {
-          for (const { cpf1, cpf2 } of this.relationships) {
-            if (
-              cpf1 === friend.cpf &&
-              cpf2 !== Number(userCpf) &&
-              !this.isDuplicateRelationship(userCpf, Number(cpf2))
-            ) {
-              const friendOfFriend = this.people.find(
-                ({ cpf }) => cpf === cpf2,
-              );
+      if (!this.relationshipIndex[cpf2]) {
+        this.relationshipIndex[cpf2] = [];
+      }
 
-              if (friendOfFriend) {
-                friendOfFriends[friendOfFriend.cpf] =
-                  (friendOfFriends[friendOfFriend.cpf] || 0) + 1;
-              }
-            }
-          }
+      this.relationshipIndex[cpf1].push(cpf2);
+
+      this.relationshipIndex[cpf2].push(cpf1);
+    }
+
+    // Find FoFs efficiently using the index
+    const userFriends = this.relationshipIndex[userCpf] || [];
+
+    for (const friendCpf of userFriends) {
+      const friendRelationships = this.relationshipIndex[friendCpf] || [];
+
+      for (const fofCpf of friendRelationships) {
+        if (fofCpf !== Number(userCpf) && !userFriends.includes(fofCpf)) {
+          friendOfFriends[fofCpf] = (friendOfFriends[fofCpf] || 0) + 1;
         }
       }
     }
 
     return friendOfFriends;
-  }
-
-  isDuplicateRelationship(userCpf, friendOfFriendCpf) {
-    return this.relationships.some(
-      ({ cpf1, cpf2 }) =>
-        cpf1 === Number(userCpf) && cpf2 === friendOfFriendCpf,
-    );
   }
 
   createRelationshipRoute = (req, res) => {
